@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-import { products } from "../assets/assets"
+import axios from 'axios'
 import {toast} from 'react-toastify'
 import { useNavigate } from "react-router-dom"
 
@@ -9,9 +9,12 @@ export const ShopContext = createContext()
 const ShopContextProvider = ({children}) => {
    const currency = '$'
    const deliveryFee = 10
+   const backendUrl = "http://localhost:8000/"
    const [search, setSearch] = useState("")
    const [showSearch, setShowSearch] = useState(false)
    const [cartItems, setCartItems] = useState({})
+   const [products, setProducts] = useState([])
+   const [token, setToken] = useState("")
    const navigate = useNavigate()
 
    const addToCart = async (itemId, size) => {
@@ -32,6 +35,15 @@ const ShopContextProvider = ({children}) => {
          cartData[itemId][size] = 1
       }
       setCartItems(cartData)
+
+      if(token) {
+         try {
+            await axios.post(backendUrl + 'api/cart/add', {itemId, size}, {headers: {token}})
+         } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+         }
+      }
    }
 
    const getCartCount = () => {
@@ -56,40 +68,85 @@ const ShopContextProvider = ({children}) => {
       cartData[itemId][size] = quantity
 
       setCartItems(cartData)
+
+      if(token) {
+         try {
+            await axios.post(backendUrl + 'api/cart/update', {itemId, size, quantity}, {headers: {token}})
+         } catch (error) {
+            console.log(error);
+            toast.error(error.message)
+         }
+      }
    }
 
    const getCartAmount = () => {
-      let totalAmount = 0
-      
-      for(const items in cartItems) {
-         let itemInfo = products.find((product) => product._id === items)
-         
-         for(const item in cartItems[items]){
-            try {
-               if(cartItems[items][item] > 0){
-                  totalAmount += itemInfo.price * cartItems[items][item]
-               }
-            } catch (error) {
-               console.error("Error at getCartAmount ",error)
+      let totalAmount = 0;
+    
+      for (const itemId in cartItems) {
+        let itemInfo = products.find((product) => product._id === itemId);
+    
+        if (itemInfo) {
+          try {
+            const itemQuantity = cartItems[itemId];
+            if (itemQuantity > 0) {
+              totalAmount += itemInfo.price * itemQuantity;
             }
-         }
+          } catch (error) {
+            console.error("Error at getCartAmount", error);
+          }
+        }
       }
+    
       return totalAmount;
+    };
+    
+
+   const getProductsData = async () => {
+      try {
+         const res = await axios.get(backendUrl + 'api/product/list')
+         
+         if(res.data.success) {
+            setProducts(res.data.message)   
+         }else{
+            toast.error("Could not fetch the products")
+         }
+         
+      } catch (error) {
+         console.log(error);
+         toast.error(error.message)
+      }
    }
+
+   const getUserCart = async (token) => {
+      // console.log(products);
+      
+      try {
+         const res = await axios.post(backendUrl + 'api/cart/get', {}, {headers:{token}})
+         
+         if(res.data.success) {
+            setCartItems(res.data.cartData)
+         }
+      } catch (error) {
+         console.log(error);
+         toast.error(error.message)
+      }
+   }
+
+   useEffect(() => {
+      getProductsData();
+      
+   }, [])
+
+   useEffect(() => {
+      if(!token && localStorage.getItem('token')){
+         setToken(localStorage.getItem('token'))
+         getUserCart(localStorage.getItem('token'))
+      }
+   }, [])
+
    const value = {
-      products,
-      currency,
-      deliveryFee,
-      search,
-      setSearch,
-      showSearch,
-      setShowSearch,
-      cartItems,
-      addToCart,
-      getCartCount,
-      updateCartQuantity,
-      getCartAmount,
-      navigate,
+      products, currency, deliveryFee, search, setSearch, showSearch, setShowSearch, cartItems, setCartItems,
+      addToCart, getCartCount, updateCartQuantity, getCartAmount, navigate, backendUrl, token, setToken
    }
 
    return (
