@@ -12,7 +12,7 @@ function LatestCollection() {
    useEffect(() => {
       setLatestProducts(products.slice(0,10))
    }, [products])
-console.log("LATEST ===> ", products);
+
 
   return (
     <div className='my-10'>

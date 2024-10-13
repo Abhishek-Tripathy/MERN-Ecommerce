@@ -78,27 +78,6 @@ const ShopContextProvider = ({children}) => {
          }
       }
    }
-
-   const getCartAmount = () => {
-      let totalAmount = 0;
-    
-      for (const itemId in cartItems) {
-        let itemInfo = products.find((product) => product._id === itemId);
-    
-        if (itemInfo) {
-          try {
-            const itemQuantity = cartItems[itemId];
-            if (itemQuantity > 0) {
-              totalAmount += itemInfo.price * itemQuantity;
-            }
-          } catch (error) {
-            console.error("Error at getCartAmount", error);
-          }
-        }
-      }
-    
-      return totalAmount;
-    };
     
 
    const getProductsData = async () => {
@@ -116,6 +95,34 @@ const ShopContextProvider = ({children}) => {
          toast.error(error.message)
       }
    }
+
+
+   const getCartAmount = () => {
+      let totalAmount = 0;
+    
+      for (const itemId in cartItems) {
+        let itemInfo = products?.find((product) => product._id === itemId);
+    
+        if (itemInfo) {
+          try {
+            const itemQuantities = cartItems[itemId]; // This is the object with sizes (e.g., { L: 1, M: 2 })
+    
+            for (const size in itemQuantities) {
+              const itemQuantity = itemQuantities[size]; // Quantity for a specific size
+    
+              if (itemQuantity > 0) {
+                totalAmount += itemInfo.price * itemQuantity;
+              }
+            }
+          } catch (error) {
+            console.error("Error at getCartAmount", error);
+          }
+        }
+      }
+    
+      return totalAmount;
+    };
+    
 
    const getUserCart = async (token) => {
       // console.log(products);

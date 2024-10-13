@@ -6,6 +6,7 @@ import connectCloudinary from './config/cloudinary.mjs'
 import userRouter from './routes/userRoute.mjs'
 import productRouter from './routes/productRoute.mjs'
 import cartRouter from './routes/cartRoutes.mjs'
+import orderRouter from './routes/orderRoute.mjs'
 
 
 dotenv.config()
@@ -25,6 +26,7 @@ app.use(cors())
 app.use('/api/user', userRouter)
 app.use('/api/product', productRouter)
 app.use('/api/cart', cartRouter)
+app.use('/api/order', orderRouter)
 
 app.get('/', (req, res) => {
    res.send("Api working")
