@@ -15,6 +15,7 @@ const ShopContextProvider = ({children}) => {
    const [cartItems, setCartItems] = useState({})
    const [products, setProducts] = useState([])
    const [token, setToken] = useState("")
+   const [theme, setTheme] = useState('light')
    const navigate = useNavigate()
 
    const addToCart = async (itemId, size) => {
@@ -139,9 +140,16 @@ const ShopContextProvider = ({children}) => {
       }
    }
 
+   const toggleTheme = () => {
+      const newTheme = theme === 'light' ? 'dark' : 'light';
+      setTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+    };
+
    useEffect(() => {
       getProductsData();
-      
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      setTheme(savedTheme);
    }, [])
 
    useEffect(() => {
@@ -153,7 +161,8 @@ const ShopContextProvider = ({children}) => {
 
    const value = {
       products, currency, deliveryFee, search, setSearch, showSearch, setShowSearch, cartItems, setCartItems,
-      addToCart, getCartCount, updateCartQuantity, getCartAmount, navigate, backendUrl, token, setToken
+      addToCart, getCartCount, updateCartQuantity, getCartAmount, navigate, backendUrl, token, setToken,
+      toggleTheme, theme
    }
 
    return (

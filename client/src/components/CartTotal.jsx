@@ -3,13 +3,13 @@ import { ShopContext } from '../context/ShopContext'
 import Title from './Title'
 
 function CartTotal() {
-   const {getCartAmount, deliveryFee, currency} = useContext(ShopContext)
+   const {getCartAmount, deliveryFee, currency, theme} = useContext(ShopContext)
 
    console.log(getCartAmount());
    
 
   return (
-    <div className='w-full'>
+    <div className={`w-full ${theme === 'dark' ? "dark" : 'light'}`}>
       <div className="text-2xl">
          <Title text1={ "CART"} text2={"TOTALS"} />
       </div>

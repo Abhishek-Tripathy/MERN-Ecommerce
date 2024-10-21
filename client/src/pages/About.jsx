@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Title from '../components/Title'
 import { assets } from '../assets/assets'
 import NewsletterBox from '../components/NewsletterBox'
+import { ShopContext } from '../context/ShopContext'
 
 function About() {
+  const {theme} = useContext(ShopContext)
   return (
-    <div>
+    <div className={`${theme==='dark' ? "text-gray-100" : ""}`}>
       <div className="text-2xl border-t pt-8 text-center">
         <Title text1={"ABOUT"} text2={"US"} />
       </div>

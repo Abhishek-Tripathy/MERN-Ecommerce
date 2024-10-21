@@ -5,7 +5,7 @@ import { assets } from '../assets/assets'
 import CartTotal from '../components/CartTotal'
 
 function Cart() {
-  const {products, currency, cartItems, updateCartQuantity, navigate} = useContext(ShopContext)
+  const {products, currency,theme, cartItems, updateCartQuantity, navigate} = useContext(ShopContext)
   const [cartData, setCartData] = useState([])
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function Cart() {
   }, [cartItems, products])
 
   return (
-    <div className='border-t pt-14'>
+    <div className={`${theme==='dark' ? "text-gray-100" : ""} border-t pt-14`}>
       <div className="text-2xl mb-3">
         <Title text1={"YOUR"} text2={"CART"} />
       </div>

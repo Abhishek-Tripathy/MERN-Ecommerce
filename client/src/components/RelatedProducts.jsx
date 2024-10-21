@@ -4,7 +4,7 @@ import Title from './Title'
 import ProductItem from './ProductItem'
 
 function RelatedProducts({category, subCategory}) {
-   const {products} = useContext(ShopContext)
+   const {products, theme} = useContext(ShopContext)
    const [related, setRelated] = useState([])
 
 
@@ -20,7 +20,7 @@ function RelatedProducts({category, subCategory}) {
       }
    }, [products])
   return (
-    <div className='my-24'>
+    <div className={`my-24 ${theme==='dark' ? "text-gray-100" : ""}`}>
       <div className="py-2 text-center text-3xl">
          <Title text1={"RELATED"} text2={"PRODUCTS"} />
       </div>

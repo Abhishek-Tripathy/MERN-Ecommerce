@@ -5,7 +5,7 @@ import ProductItem from './ProductItem'
 
 function LatestCollection() {
 
-   const {products} = useContext(ShopContext)
+   const {products, theme} = useContext(ShopContext)
 
    const [latestProducts, setLatestProducts] = useState([])
 
@@ -15,10 +15,10 @@ function LatestCollection() {
 
 
   return (
-    <div className='my-10'>
+    <div className={`my-10 ${theme==='dark' ? "text-gray-100 bg-gray-900" : ""}`}>
       <div className="py-8 text-center text-3xl">
          <Title text1={"LATEST"} text2={"COllECTIONS"} />
-         <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>
+         <p className={`w-3/4 m-auto text-xs sm:text-sm md:text-base ${theme==='dark' ? "text-gray-400" : "text-gray-600"}`}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
          </p>
       </div>

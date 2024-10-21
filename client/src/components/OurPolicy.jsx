@@ -1,23 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { assets } from '../assets/assets'
+import { ShopContext } from '../context/ShopContext'
+import { MdCheckCircleOutline } from "react-icons/md";
+import { TfiHeadphoneAlt } from "react-icons/tfi";
+import { MdOutlineCurrencyExchange } from "react-icons/md";
+
 
 function OurPolicy() {
+  const {theme} = useContext(ShopContext)
   return (
-    <div className='flex flex-col sm:flex-row justify-around gap-12 sm:gap-2 text-center py-20 text-xs sm:text-sm md:text-base text-gray-700'>
+    <div className={`${theme==='dark' ? "text-gray-100" : ""} flex flex-col sm:flex-row justify-around gap-12 sm:gap-2 text-center py-20 text-xs sm:text-sm md:text-base text-gray-700`}>
       <div>
-         <img src={assets.exchange_icon} className='w-12 m-auto mb-5' alt="" />
-         <p className='font-semibold'>Easy Exchange Policy</p>
-         <p className='text-gray-400'>We Offer hassle free exchange policy</p>
+         <MdOutlineCurrencyExchange className={`${theme==='dark' ? "text-gray-100":""} w-12 m-auto mb-3`} style={{ width: '58px', height: '58px' }} />
+         <p className={`${theme==='dark' ? "text-gray-200" : "text-gray-800"}`}>Easy Exchange Policy</p>
+         <p className={`${theme==='dark' ? "text-gray-400" : "text-gray-600"}`}>We Offer hassle free exchange policy</p>
       </div>
       <div>
-         <img src={assets.quality_icon} className='w-12 m-auto mb-5' alt="" />
-         <p className='font-semibold'>7 Days Return Policy</p>
-         <p className='text-gray-400'>We provide 7 days free return policy</p>
+         <MdCheckCircleOutline className={`${theme==='dark' ? "text-gray-100":""} w-12 m-auto mb-3`} style={{ width: '60px', height: '60px' }} />
+         <p className={`${theme==='dark' ? "text-gray-200" : "text-gray-800"}`}>7 Days Return Policy</p>
+         <p className={`${theme==='dark' ? "text-gray-400" : "text-gray-600"}`}>We provide 7 days free return policy</p>
       </div>
       <div>
-         <img src={assets.support_img} className='w-12 m-auto mb-5' alt="" />
-         <p className='font-semibold'>EBest Customer Support</p>
-         <p className='text-gray-400'>We provide best customer support</p> 
+         <TfiHeadphoneAlt className={`${theme==='dark' ? "text-white":""} w-12 m-auto mb-3`} style={{ width: '60px', height: '60px' }} />
+         <p className={`${theme==='dark' ? "text-gray-200" : "text-gray-800"}`}>Best Customer Support</p>
+         <p className={`${theme==='dark' ? "text-gray-400" : "text-gray-600"}`}>We provide best customer support</p> 
       </div>
     </div>
   )

@@ -4,7 +4,7 @@ import Title from '../components/Title'
 import axios from 'axios'
 
 function Orders() {
-  const {backendUrl, token, currency} = useContext(ShopContext)
+  const {backendUrl, token, currency, theme} = useContext(ShopContext)
 
   const [orderData,setOrderData] = useState([])
 
@@ -41,7 +41,7 @@ function Orders() {
   }, [token])
 
   return (
-    <div className='border-t pt-16'>
+    <div className={`border-t pt-16 ${theme==='dark' ? "text-gray-100" : ""}`}>
       <div className="text-2xl">
         <Title text1={"MY"} text2={"ORDERS"} />
       </div>

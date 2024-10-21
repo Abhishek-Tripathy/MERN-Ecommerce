@@ -5,7 +5,7 @@ import Title from "../components/Title";
 import ProductItem from "../components/ProductItem";
 
 export default function Collection() {
-  const { products, search, showSearch } = useContext(ShopContext);
+  const { products, search, showSearch, theme } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([])
   const [category, setCategory] = useState([])
@@ -68,7 +68,7 @@ export default function Collection() {
   }, [sortType])
   
   return (
-    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t">
+    <div className={`${theme==='dark' ? "text-gray-100" : ""} flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t`}>
       {/* Filter Options */}
       <div className="min-w-60">
         <p

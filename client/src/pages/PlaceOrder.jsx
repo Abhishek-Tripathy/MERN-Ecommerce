@@ -7,7 +7,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 
 function PlaceOrder() {
-  const {navigate, token, backendUrl, cartItems, setCartItems, getCartAmount, deliveryFee, products} = useContext(ShopContext)
+  const {navigate, token, backendUrl, cartItems, theme, setCartItems, getCartAmount, deliveryFee, products} = useContext(ShopContext)
   const [method, setMethod] = useState('cod')
   const [formData, setFormData] = useState({
     firstName: "",
@@ -90,7 +90,7 @@ function PlaceOrder() {
   
 
   return (
-    <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t'>
+    <form onSubmit={onSubmitHandler} className={`${theme==='dark' ? "text-gray-100" : ""} flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t`}>
       {/* -------------LEFT SIDE----------------- */}
       <div className="flex flex-col gap-4 w-full max-w-[480px]">
         <div className="text-xl sm:text-2xl my-3">

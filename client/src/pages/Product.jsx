@@ -7,7 +7,7 @@ import RelatedProducts from "../components/RelatedProducts";
 function Product() {
   const { productId } = useParams();
   const [productData, setProductData] = useState(false);
-  const { products, currency, addToCart } = useContext(ShopContext);
+  const { products, currency, addToCart, theme } = useContext(ShopContext);
   const [image, setImage] = useState("");
   const [size, setSize] = useState("")
 
@@ -26,7 +26,7 @@ function Product() {
   }, [products, productId]);
 
   return productData ? (
-    <div className="border-t-2 transition-opacity pt-10 ease-in duration-500 opacity-100">
+    <div className={`border-t-2 transition-opacity pt-10 ease-in duration-500 opacity-100 ${theme==='dark' ? "text-gray-100" : ""}`}>
       {/* Product Data */}
       <div className="flex gap-12 ms:gap-12 flex-col sm:flex-row">
         {/*------------ Product Images ------------------*/}

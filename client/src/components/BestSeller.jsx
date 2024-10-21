@@ -4,7 +4,7 @@ import Title from './Title'
 import ProductItem from './ProductItem'
 
 function BestSeller() {
-   const {products} = useContext(ShopContext)
+   const {products, theme} = useContext(ShopContext)
    const [bestSeller, setBestSeller] = useState([])
 
    useEffect(() => {
@@ -12,10 +12,10 @@ function BestSeller() {
       setBestSeller(bestItem.slice(0,5))
    },[products])
   return (
-    <div className='my-10'>
+    <div className={`my-10 ${theme==='dark' ? "bg-gray-900 text-gray-100" : ""}`}>
       <div className="py-8 text-center text-3xl">
          <Title text1={`BEST`} text2={`SELLERS`} />
-         <p className='w-3/4 m-auto text-xs sm:text-sm lg:text-base text-gray-600'>
+         <p className={`w-3/4 m-auto text-xs sm:text-sm lg:text-base ${theme==='dark' ? "text-gray-400" : "text-gray-600"}`}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. 
          </p>
       </div>

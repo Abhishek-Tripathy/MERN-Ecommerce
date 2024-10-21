@@ -9,7 +9,7 @@ function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const {token, setToken, navigate, backendUrl} = useContext(ShopContext)
+  const {token, setToken, navigate, backendUrl, theme} = useContext(ShopContext)
 
   async function onSubmitHandler(e) {
     e.preventDefault()
@@ -45,7 +45,7 @@ function Login() {
   }, [token])
 
   return (
-    <form onSubmit={onSubmitHandler} className='flex flex-col m-auto items-center w-[90%] sm:max-w-96mt-14 gap-4 text-gray-800'>
+    <form onSubmit={onSubmitHandler} className={`flex flex-col m-auto items-center w-[90%] sm:max-w-96mt-14 gap-4 text-gray-800 ${theme==='dark' ? "text-gray-100" : ""}`}>
       <div className="inline-flex items-center mb-2 mt-10 gap-2">
         <p className='prata-regular text-3xl'>{currentState}</p>
         <hr className='border-none w-8 h-[1.5px] bg-gray-800' />
