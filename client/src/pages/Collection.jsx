@@ -89,15 +89,15 @@ export default function Collection() {
         >
           <p className="mb-3 text-sm font-medium">CATEGORIES</p>
           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-            <p className="flex gap-2">
-              <input type="checkbox" className="w-3" onChange={toggleCategory} value={`Men`} />
+            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
+              <input type="checkbox" className={`w-3`} onChange={toggleCategory} value={`Men`} />
               Men
             </p>
-            <p className="flex gap-2">
+            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
               <input type="checkbox" className="w-3" onChange={toggleCategory} value={`Women`} />
               Women
             </p>
-            <p className="flex gap-2">
+            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
               <input type="checkbox" className="w-3" onChange={toggleCategory} value={`Kids`} />
               Kids
             </p>
@@ -110,15 +110,15 @@ export default function Collection() {
         >
           <p className="mb-3 text-sm font-medium">TYPE</p>
           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-            <p className="flex gap-2">
+            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
               <input type="checkbox" className="w-3" onChange={toggleSubCategory} value={`Topwear`} />
               Topwear
             </p>
-            <p className="flex gap-2">
+            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
               <input type="checkbox" className="w-3" onChange={toggleSubCategory} value={`Bottomwear`} />
               Bottomwear
             </p>
-            <p className="flex gap-2">
+            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
               <input type="checkbox" className="w-3" onChange={toggleSubCategory} value={`Winterwear`} />
               Winterwear
             </p>
@@ -130,7 +130,7 @@ export default function Collection() {
         <div className="flex justify-between text-base sm:text-2xl mb-4">
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
           {/* PRODUCT SORT */}
-          <select className="border border-gray-300 text-sm px-2" onChange={(e) => setSortType(e.target.value) }>
+          <select className={`border ${theme==='dark' ? "border-gray-600 bg-gray-600" : "border-gray-400 "} text-sm px-2`} onChange={(e) => setSortType(e.target.value) }>
             <option value="relavent">Sort by: relavent</option>
             <option value="low-high">Sort by: low-high</option>
             <option value="high-low">Sort by: high-low</option>

@@ -121,17 +121,17 @@ function PlaceOrder() {
           <Title text1={"PAYMENT"} text2={"METHOD"} />
           {/* ----------------Payment Method Selection ------------------------ */}
           <div className="flex flex-col gap-3 lg:flex-row">
-            <div onClick={() => setMethod('stripe')} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
+            <div onClick={() => setMethod('stripe')} className={`flex items-center gap-3 border p-2 px-3 cursor-pointer`}>
               <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? "bg-green-400" : ""}`}></p>
               <img className='h-5 mx-4' src={assets.stripe_logo} alt="" />
             </div>
             <div onClick={() => setMethod('cod')} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
               <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? "bg-green-400" : ""}`}></p>
-              <p className='text-gray-500 text-sm font-medium mx-4 '>CASH ON DELIVERY</p>
+              <p className={`text-sm font-medium mx-4 ${theme==='dark' ? "text-gray-300": "text-gray-600"}`}>CASH ON DELIVERY</p>
             </div>
           </div>
           <div className="w-full text-end mt-8">
-            <button type='submit' className='bg-black text-white px-16 py-3 text-sm'>PLACE ORDER</button>
+            <button type='submit' className={`bg-black text-white px-16 py-3 text-sm  ${theme==='dark' ? "bg-gray-100 text-gray-900 hover:bg-gray-300" : "bg-black text-white hover:bg-gray-700"}`}>PLACE ORDER</button>
           </div>
         </div>
       </div>
