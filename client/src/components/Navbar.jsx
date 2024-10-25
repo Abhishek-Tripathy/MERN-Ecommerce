@@ -3,6 +3,7 @@ import { assets } from '../assets/assets'
 import { Link, NavLink } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext'
 import { FiSun, FiMoon, FiSearch, FiUser, FiShoppingCart } from 'react-icons/fi';
+import { TbMenuDeep } from "react-icons/tb";
 
 function Navbar() {
 
@@ -23,7 +24,7 @@ function Navbar() {
     <div className={`flex items-center justify-between font-medium py-5 ${theme==='dark' ? "text-gray-100 bg-gray-900" : ""}`}>
 
       <Link to='/'>
-         <img src={assets.logo} alt="" className='w-36'/>
+         <img src={theme==='dark' ? assets.logo2 : assets.logo} alt="" className='w-36'/>
       </Link>
       <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
          <NavLink to='/' className={`flex flex-col items-center gap-1 ${theme === 'dark' ? "text-gray-100" : ""}`}>
@@ -66,7 +67,7 @@ function Navbar() {
          <button onClick={toggleTheme}>
             {theme==='light' ? <FiMoon size={24} /> : <FiSun size={24} />}
          </button>
-         <img onClick={() => setVisible(true)} src={assets.menu_icon} className='cursor-pointer w-5 sm:hidden' alt="" />
+         <TbMenuDeep style={{ width: '28px', height: '28px'}} onClick={() => setVisible(true)} src={assets.menu_icon} className='cursor-pointer w-5 sm:hidden' />
       </div>
 
       {/* Sidebar Menu for Small screen */}
@@ -76,10 +77,42 @@ function Navbar() {
                <img src={assets.dropdown_icon} className='h-4 rotate-180 ' alt="" />
                <p>Back</p>
             </div>
-            <NavLink onClick={() => setVisible(false)} className={`${theme==='dark' ? "text-gray-100" : ""} py-2 pl-6 border`} to='/'>HOME</NavLink>
-            <NavLink onClick={() => setVisible(false)} className={`${theme==='dark' ? "text-gray-100" : ""} py-2 pl-6 border`} to='/collection'>COLLECTION</NavLink>
-            <NavLink onClick={() => setVisible(false)} className={`${theme==='dark' ? "text-gray-100" : ""} py-2 pl-6 border`} to='/about'>ABOUT</NavLink>
-            <NavLink onClick={() => setVisible(false)} className={`${theme==='dark' ? "text-gray-100" : ""} py-2 pl-6 border`} to='/contact'>CONTACT</NavLink>
+         <NavLink
+         onClick={() => setVisible(false)}
+         className={({ isActive }) => 
+            `${theme === 'dark' ? "text-gray-100" : ""} py-2 pl-6 border ${isActive ? (theme === 'dark' ? "bg-gray-300  text-gray-900" : "bg-black text-white") : ""}`
+         }
+         to='/'
+      >
+         HOME
+      </NavLink>
+      <NavLink
+         onClick={() => setVisible(false)}
+         className={({ isActive }) => 
+            `${theme === 'dark' ? "text-gray-100" : ""} py-2 pl-6 border ${isActive ? (theme === 'dark' ? "bg-gray-300  text-gray-900" : "bg-black text-white") : ""}`
+         }
+         to='/collection'
+      >
+         COLLECTION
+      </NavLink>
+      <NavLink
+         onClick={() => setVisible(false)}
+         className={({ isActive }) => 
+            `${theme === 'dark' ? "text-gray-100" : ""} py-2 pl-6 border ${isActive ? (theme === 'dark' ? "bg-gray-300 text-gray-900" : "bg-black text-white") : ""}`
+         }
+         to='/about'
+      >
+         ABOUT
+      </NavLink>
+      <NavLink
+         onClick={() => setVisible(false)}
+         className={({ isActive }) => 
+            `${theme === 'dark' ? "text-gray-100" : ""} py-2 pl-6 border ${isActive ? (theme === 'dark' ? "bg-gray-300 text-gray-900" : "bg-black text-white") : ""}`
+         }
+         to='/contact'
+      >
+         CONTACT
+      </NavLink>
          </div>
       </div>
 

@@ -9,7 +9,7 @@ function Footer() {
     <div className={`${theme==='dark' ? "text-gray-100" : ""}`}>
       <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm ">
         <div>
-          <img src={assets.logo} className="mb-5 w-32" alt="" />
+          <img src={theme==='dark' ? assets.logo2 : assets.logo} className="mb-5 w-32" alt="" />
           <p className={`w-full md:w-2/3 ${theme==='dark' ? "text-gray-400" : "text-gray-600"}`}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius non
             quae distinctio possimus! Fugit aperiam atque sunt.
@@ -34,7 +34,7 @@ function Footer() {
       </div>
       <div>
          <hr />
-         <p className="text-sm py-5 text-center"> Copyright 2024 @Company.com - All rights reserved</p>
+         <p className="text-sm py-5 text-center"> Created By - <a className="text-blue-500 text-lg" href="https://www.linkedin.com/in/abhishek-tripathy-a79152213/">@Abhishek Tripathy</a></p>
       </div>
     </div>
   );
