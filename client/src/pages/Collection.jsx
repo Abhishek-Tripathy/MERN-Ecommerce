@@ -3,6 +3,7 @@ import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
 import Title from "../components/Title";
 import ProductItem from "../components/ProductItem";
+import { motion } from 'framer-motion';
 
 export default function Collection() {
   const { products, search, showSearch, theme } = useContext(ShopContext);
@@ -68,83 +69,123 @@ export default function Collection() {
   }, [sortType])
   
   return (
-    <div className={`${theme==='dark' ? "text-gray-100" : ""} flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t`}>
+    <motion.div
+        className={`flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t ${theme === 'dark' ? "text-gray-100" : ""}`}
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1 }}
+    >
       {/* Filter Options */}
       <div className="min-w-60">
         <p
           onClick={() => setShowFilter(!showFilter)}
-          className="my-2 text-xl flex items-center cursor-pointer gap-2"
+          className="my-2 text-xl flex items-center gap-2"
         >
-          FILTERS
-          <img
+          <span className={`border px-2 py-1 rounded-md cursor-pointer ${theme === 'dark' ? "bg-gray-600" : ""}`}>FILTERS</span>
+          <motion.img
             src={assets.dropdown_icon}
             className={`h-3 sm:hidden ${showFilter ? "rotate-90" : ""}`}
             alt=""
+            animate={{ rotate: showFilter ? 90 : 0 }} // Animate rotation
+            transition={{ duration: 0.5 }}
           />
         </p>
         {/* Category Filter */}
-        <div
-          className={`border border-gray-300 pl-5 py-3 mt-6 ${
-            showFilter ? "" : "hidden" } sm:block`}
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: showFilter ? 1 : 0, height: showFilter ? 'auto' : 0 }}
+          transition={{ duration: 0.3 }}
+          className={`border border-gray-300 pl-5 py-3 mt-6`}
         >
           <p className="mb-3 text-sm font-medium">CATEGORIES</p>
           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
+            <p className={`flex gap-2 ${theme === 'dark' ? "text-gray-300" : ""}`}>
               <input type="checkbox" className={`w-3`} onChange={toggleCategory} value={`Men`} />
               Men
             </p>
-            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
+            <p className={`flex gap-2 ${theme === 'dark' ? "text-gray-300" : ""}`}>
               <input type="checkbox" className="w-3" onChange={toggleCategory} value={`Women`} />
               Women
             </p>
-            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
+            <p className={`flex gap-2 ${theme === 'dark' ? "text-gray-300" : ""}`}>
               <input type="checkbox" className="w-3" onChange={toggleCategory} value={`Kids`} />
               Kids
             </p>
           </div>
-        </div>
-        {/* SUB CATEGORY */}
-        <div
-          className={`border border-gray-300 pl-5 py-3 my-5 ${
-            showFilter ? "" : "hidden" } sm:block`}
+        </motion.div>
+        {/* Sub Category */}
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: showFilter ? 1 : 0, height: showFilter ? 'auto' : 0 }}
+          transition={{ duration: 0.3 }}
+          className={`border border-gray-300 pl-5 py-3 my-5`}
         >
           <p className="mb-3 text-sm font-medium">TYPE</p>
           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
+            <p className={`flex gap-2 ${theme === 'dark' ? "text-gray-300" : ""}`}>
               <input type="checkbox" className="w-3" onChange={toggleSubCategory} value={`Topwear`} />
               Topwear
             </p>
-            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
+            <p className={`flex gap-2 ${theme === 'dark' ? "text-gray-300" : ""}`}>
               <input type="checkbox" className="w-3" onChange={toggleSubCategory} value={`Bottomwear`} />
               Bottomwear
             </p>
-            <p className={`flex gap-2 ${theme==='dark'?"text-gray-300":""}`}>
+            <p className={`flex gap-2 ${theme === 'dark' ? "text-gray-300" : ""}`}>
               <input type="checkbox" className="w-3" onChange={toggleSubCategory} value={`Winterwear`} />
               Winterwear
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
       {/* RIGHT SIDE */}
       <div className="flex-1">
         <div className="flex justify-between text-base sm:text-2xl mb-4">
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
           {/* PRODUCT SORT */}
-          <select className={`border ${theme==='dark' ? "border-gray-600 bg-gray-600" : "border-gray-400 "} text-sm px-2`} onChange={(e) => setSortType(e.target.value) }>
+          <motion.select
+            className={`border ${theme === 'dark' ? "border-gray-600 bg-gray-600" : "border-gray-400 "} text-sm px-2`}
+            onChange={(e) => setSortType(e.target.value)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <option value="relavent">Sort by: relavent</option>
             <option value="low-high">Sort by: low-high</option>
             <option value="high-low">Sort by: high-low</option>
-          </select>
+          </motion.select>
         </div>
         {/* MAP PRODUCTS */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-          {
-            filterProducts.map((item, index) => (
-              <ProductItem key={index} id={item._id} image={item.image} name={item.name} price={item.price} />
-            ))
-          }
-        </div>
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {
+              opacity: 0,
+              transition: { staggerChildren: 0.5 },
+            },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.5 },
+            },
+          }}
+        >
+          {filterProducts.map((item, index) => (
+            <motion.div key={index} variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 1, delay: index * 0.1 }}
+            >
+              <ProductItem
+                id={item._id}
+                image={item.image}
+                name={item.name}
+                price={item.price}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
-    </div>
-  );
+    </motion.div>
+);
 }

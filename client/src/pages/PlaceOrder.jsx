@@ -5,6 +5,8 @@ import { assets } from '../assets/assets'
 import { ShopContext } from '../context/ShopContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { motion } from 'framer-motion';
+
 
 function PlaceOrder() {
   const {navigate, token, backendUrl, cartItems, theme, setCartItems, getCartAmount, deliveryFee, products} = useContext(ShopContext)
@@ -20,6 +22,17 @@ function PlaceOrder() {
     country: "",
     phone: "",
   })
+
+  const formVariants = {
+    hidden: { opacity: 0, y: 20 }, // Initial state before animation
+    visible: { opacity: 1, y: 0 },  // End state of animation
+  };
+
+  const inputVariants = {
+    hidden: { opacity: 0, y: 10 },  // Initial state for inputs
+    visible: { opacity: 1, y: 0 },   // End state for inputs
+  };
+
 
   const onChangeHandler = (e) => {
     const name = e.target.name
@@ -90,29 +103,145 @@ function PlaceOrder() {
   
 
   return (
-    <form onSubmit={onSubmitHandler} className={`${theme==='dark' ? "text-gray-100" : ""} flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t`}>
+    <motion.form
+      onSubmit={onSubmitHandler}
+      className={`${theme === 'dark' ? "text-gray-100" : ""} flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t`}
+      initial="hidden"
+      animate="visible"
+      variants={formVariants}
+      transition={{ duration: 0.5 }}
+    >
       {/* -------------LEFT SIDE----------------- */}
       <div className="flex flex-col gap-4 w-full max-w-[480px]">
         <div className="text-xl sm:text-2xl my-3">
           <Title text1={"DELIVERY"} text2={"INFORMATION"} />
         </div>
         <div className="flex gap-3">
-          <input required onChange={onChangeHandler} value={formData.firstName} type="text" name='firstName' placeholder='First Name' className='border border-x-gray-300 rounded py-1.5 px-3.5 w-full' />
-          <input required onChange={onChangeHandler} value={formData.lastName} type="text" name='lastName' placeholder='Last Name' className='border border-x-gray-300 rounded py-1.5 px-3.5 w-full' />
+          <motion.input
+            required
+            onChange={onChangeHandler}
+            value={formData.firstName}
+            type="text"
+            name='firstName'
+            placeholder='First Name'
+            className={`text-gray-900 border border-x-gray-300 rounded py-1.5 px-3.5 w-full`}
+            variants={inputVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.5, delay: 0.1 }} // Delay for first name
+          />
+          <motion.input
+            required
+            onChange={onChangeHandler}
+            value={formData.lastName}
+            type="text"
+            name='lastName'
+            placeholder='Last Name'
+            className={`text-gray-900 border border-x-gray-300 rounded py-1.5 px-3.5 w-full`}
+            variants={inputVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.5, delay: 0.2 }} // Delay for last name
+          />
         </div>
-        <input required onChange={onChangeHandler} value={formData.email} type="email" name='email' placeholder='Email Address' className='border border-x-gray-300 rounded py-1.5 px-3.5 w-full' />
-        <input required onChange={onChangeHandler} value={formData.street} type="text" name='street' placeholder='Street' className='border border-x-gray-300 rounded py-1.5 px-3.5 w-full' />
+        <motion.input
+          required
+          onChange={onChangeHandler}
+          value={formData.email}
+          type="email"
+          name='email'
+          placeholder='Email Address'
+          className={`text-gray-900 border border-x-gray-300 rounded py-1.5 px-3.5 w-full`}
+          variants={inputVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.5, delay: 0.3 }} // Delay for email
+        />
+        <motion.input
+          required
+          onChange={onChangeHandler}
+          value={formData.street}
+          type="text"
+          name='street'
+          placeholder='Street'
+          className={`text-gray-900 border border-x-gray-300 rounded py-1.5 px-3.5 w-full`}
+          variants={inputVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.5, delay: 0.4 }} // Delay for street
+        />
         <div className="flex gap-3">
-          <input required onChange={onChangeHandler} value={formData.city} type="text" name='city' placeholder='City' className='border border-x-gray-300 rounded py-1.5 px-3.5 w-full' />
-          <input required onChange={onChangeHandler} value={formData.state} type="text" name='state' placeholder='State' className='border border-x-gray-300 rounded py-1.5 px-3.5 w-full' />
+          <motion.input
+            required
+            onChange={onChangeHandler}
+            value={formData.city}
+            type="text"
+            name='city'
+            placeholder='City'
+            className={`text-gray-900 border border-x-gray-300 rounded py-1.5 px-3.5 w-full`}
+            variants={inputVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.5, delay: 0.5 }} // Delay for city
+          />
+          <motion.input
+            required
+            onChange={onChangeHandler}
+            value={formData.state}
+            type="text"
+            name='state'
+            placeholder='State'
+            className={`text-gray-900 border border-x-gray-300 rounded py-1.5 px-3.5 w-full`}
+            variants={inputVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.5, delay: 0.6 }} // Delay for state
+          />
         </div>
         <div className="flex gap-3">
-          <input required onChange={onChangeHandler} value={formData.zipcode} type="number" name='zipcode' placeholder='ZipCode' className='border border-x-gray-300 rounded py-1.5 px-3.5 w-full' />
-          <input required onChange={onChangeHandler} value={formData.country} type="text" name='country' placeholder='Country' className='border border-x-gray-300 rounded py-1.5 px-3.5 w-full' />
+          <motion.input
+            required
+            onChange={onChangeHandler}
+            value={formData.zipcode}
+            type="number"
+            name='zipcode'
+            placeholder='ZipCode'
+            className={`text-gray-900 border border-x-gray-300 rounded py-1.5 px-3.5 w-full`}
+            variants={inputVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.5, delay: 0.7 }} // Delay for zipcode
+          />
+          <motion.input
+            required
+            onChange={onChangeHandler}
+            value={formData.country}
+            type="text"
+            name='country'
+            placeholder='Country'
+            className={`text-gray-900 border border-x-gray-300 rounded py-1.5 px-3.5 w-full`}
+            variants={inputVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.5, delay: 0.8 }} // Delay for country
+          />
         </div>
-        <input required onChange={onChangeHandler} value={formData.phone} type="number" name='phone' placeholder='Phone Number' className='border border-x-gray-300 rounded py-1.5 px-3.5 w-full' />
+        <motion.input
+          required
+          onChange={onChangeHandler}
+          value={formData.phone}
+          type="number"
+          name='phone'
+          placeholder='Phone Number'
+          className={`text-gray-900 border border-x-gray-300 rounded py-1.5 px-3.5 w-full`}
+          variants={inputVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.5, delay: 0.9 }} // Delay for phone
+        />
       </div>
-      {/* ----------------------RIght Side-------------------- */}
+
+      {/* ----------------------RIGHT SIDE-------------------- */}
       <div className="mt-8">
         <div className="mt-8 min-w-80">
           <CartTotal />
@@ -121,22 +250,39 @@ function PlaceOrder() {
           <Title text1={"PAYMENT"} text2={"METHOD"} />
           {/* ----------------Payment Method Selection ------------------------ */}
           <div className="flex flex-col gap-3 lg:flex-row">
-            <div onClick={() => setMethod('stripe')} className={`flex items-center gap-3 border p-2 px-3 cursor-pointer`}>
+            <motion.div
+              onClick={() => setMethod('stripe')}
+              className={`flex items-center gap-3 border p-2 px-3 cursor-pointer`}
+              whileHover={{ scale: 1.05 }} // Scale on hover
+              whileTap={{ scale: 0.95 }} // Scale down on tap
+            >
               <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? "bg-green-400" : ""}`}></p>
               <img className='h-5 mx-4' src={assets.stripe_logo} alt="" />
-            </div>
-            <div onClick={() => setMethod('cod')} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
+            </motion.div>
+            <motion.div
+              onClick={() => setMethod('cod')}
+              className="flex items-center gap-3 border p-2 px-3 cursor-pointer"
+              whileHover={{ scale: 1.05 }} // Scale on hover
+              whileTap={{ scale: 0.95 }} // Scale down on tap
+            >
               <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? "bg-green-400" : ""}`}></p>
-              <p className={`text-sm font-medium mx-4 ${theme==='dark' ? "text-gray-300": "text-gray-600"}`}>CASH ON DELIVERY</p>
-            </div>
+              <p className={`text-sm font-medium mx-4 ${theme === 'dark' ? "text-gray-300" : "text-gray-600"}`}>CASH ON DELIVERY</p>
+            </motion.div>
           </div>
           <div className="w-full text-end mt-8">
-            <button type='submit' className={`bg-black text-white px-16 py-3 text-sm  ${theme==='dark' ? "bg-gray-100 text-gray-900 hover:bg-gray-300" : "bg-black text-white hover:bg-gray-700"}`}>PLACE ORDER</button>
+            <motion.button
+              type='submit'
+              className={`px-16 py-3 text-sm ${theme === 'dark' ? "bg-gray-100 text-black font-medium hover:bg-gray-300" : "bg-black text-white hover:bg-gray-700"}`}
+              whileHover={{ scale: 1.05 }} // Scale on hover
+              whileTap={{ scale: 0.95 }} // Scale down on tap
+            >
+              PLACE ORDER
+            </motion.button>
           </div>
         </div>
       </div>
-    </form>
-  )
+    </motion.form>
+  );
 }
 
 export default PlaceOrder

@@ -58,20 +58,20 @@ function Product() {
             <p className="pl-2">(122)</p>
           </div>
           <p className="mt-5 text-3xl font-medium">{currency}{productData.price}</p>
-          <p className="mt-5 text-gray-500 md:w-4/5">{productData.description}</p>
+          <p className={`mt-5 ${theme==='dark' ? "text-gray-400" : "text-gray-500"} md:w-4/5`}>{productData.description}</p>
           <div className="flex flex-col gap-4 my-8">
             <p>Select Size</p>
             <div className="flex gap-2">
               {productData.sizes.map((item, index) => (
                 <button key={index} onClick={() => setSize(item)}
-                className={`border py-2 px-4  ${item === size ? "border-orange-600 bg-orange-100" : "bg-gray-100"}`}>{item}</button>
+                className={`${theme === 'dark' ? "bg-gray-100 text-gray-900" : ""} border py-2 px-4  ${item === size ? "border-orange-600 bg-orange-100" : "bg-gray-100"}`}>{item}</button>
               ))}
             </div>
           </div>
           <button onClick={() => addToCart(productData._id, size)}
-          className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700 ">ADD TO CART</button>
+          className={`${theme==='dark' ? "bg-gray-100 text-gray-900" : "bg-black text-white active:bg-gray-700"} px-8 py-3 text-sm`}>ADD TO CART</button>
           <hr className="mt-8 sm:w-3/4"/>
-          <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
+          <div className={`text-sm ${theme==='dark' ? "text-gray-400" : "text-gray-500"} mt-5 flex flex-col gap-1`}>
             <p>100% original product</p>
             <p>Cash on delivery is available on this product</p>
             <p>Easy return and exchange policy within 7 days</p>
@@ -84,7 +84,7 @@ function Product() {
           <b className="px-5 py-3 border text-sm">Description</b>
           <p className="px-5 py-3 border text-sm">Reviews(122)</p>
         </div>
-        <div className="flex flex-col gap-4 border p-6 text-sm text-gray-500">
+        <div className={`flex flex-col gap-4 border p-6 text-sm ${theme==='dark' ? "text-gray-400" : "text-gray-500"}`}>
           <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem error vitae aliquid? Dolor veritatis numquam velit laborum, enim officia quibusdam quos </p>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat nesciunt repellat ratione perspiciatis provident suscipit voluptatem dolore sit rem.</p>
         </div>

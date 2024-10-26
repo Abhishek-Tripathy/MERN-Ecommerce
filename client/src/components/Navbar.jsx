@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { ShopContext } from '../context/ShopContext'
 import { FiSun, FiMoon, FiSearch, FiUser, FiShoppingCart } from 'react-icons/fi';
 import { TbMenuDeep } from "react-icons/tb";
@@ -8,6 +8,7 @@ import { TbMenuDeep } from "react-icons/tb";
 function Navbar() {
 
    const [visible, setVisible] = useState(false)
+   const location = useLocation()
 
    const {setShowSearch, getCartCount, token, navigate, setToken, setCartItems, toggleTheme, theme} = useContext(ShopContext)
    
@@ -46,7 +47,9 @@ function Navbar() {
       </ul>
 
       <div className={`${theme==='dark' ? "text-gray-100 bg-gray-900" : ""} flex items-center gap-6`}>
-         <FiSearch onClick={() => setShowSearch(true)} className='w-5 cursor-pointer p-0 m-0' style={{ width: '25px', height: '25px' }} />
+         {location.pathname === "/collection" && (
+            <FiSearch onClick={() => setShowSearch(true)} className='w-5 cursor-pointer p-0 m-0' style={{ width: '25px', height: '25px' }} />
+         )}
 
          <div className={`group relative ${theme==='dark' ? "text-gray-100 bg-gray-900" : ""}`}>
             <FiUser onClick={() => token ? null : navigate('/login')} className='w-5 cursor-pointer' style={{ width: '27px', height: '27px' }}/>

@@ -35,15 +35,19 @@ const ShopContextProvider = ({children}) => {
          cartData[itemId] = {}
          cartData[itemId][size] = 1
       }
-      setCartItems(cartData)
+      
 
       if(token) {
          try {
             await axios.post(backendUrl + '/api/cart/add', {itemId, size}, {headers: {token}})
+            toast.success("Product Added to Cart")
+            setCartItems(cartData)
          } catch (error) {
             console.log(error);
             toast.error(error.message)
          }
+      }else{
+         toast.error("Pease Login")
       }
    }
 
