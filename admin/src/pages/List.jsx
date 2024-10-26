@@ -11,7 +11,7 @@ function List({token}) {
 
    const fetchList = async () => {
       try {
-         const res = await axios.get(backendUrl + "api/product/list")
+         const res = await axios.get(backendUrl + "/api/product/list")
          console.log(res);
          
          if(res.data.success) {
@@ -28,7 +28,7 @@ function List({token}) {
 
    const removeProduct = async (id) => {
       try {
-         const res = await axios.post(backendUrl + "api/product/remove", {id}, {headers: {token}})
+         const res = await axios.post(backendUrl + "/api/product/remove", {id}, {headers: {token}})
          console.log(res);
          
          if(res.data.success) {

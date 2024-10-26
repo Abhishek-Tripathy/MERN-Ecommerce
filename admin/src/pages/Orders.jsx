@@ -14,7 +14,7 @@ function Orders({ token }) {
 
     try {
       const res = await axios.post(
-        backendUrl + "api/order/list",
+        backendUrl + "/api/order/list",
         {},
         { headers: { token } }
       );
@@ -31,7 +31,7 @@ function Orders({ token }) {
 
   const statusHandler = async (e, orderId) => {
      try {
-      const res = await axios.post(backendUrl + 'api/order/status', {orderId, status:e.target.value}, {headers: {token}})
+      const res = await axios.post(backendUrl + '/api/order/status', {orderId, status:e.target.value}, {headers: {token}})
 
       if(res.data.success) {
         await fetchAllOrders()
