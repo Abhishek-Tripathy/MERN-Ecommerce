@@ -14,7 +14,7 @@ function Orders() {
         return null
       }
 
-      const res = await axios.post(backendUrl + 'api/order/userorders', {}, {headers: {token}})
+      const res = await axios.post(backendUrl + '/api/order/userorders', {}, {headers: {token}})
       console.log(res);
       
       if(res.data.success) {

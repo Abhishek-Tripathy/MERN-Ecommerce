@@ -18,7 +18,7 @@ function Verify() {
             return null
          }
 
-         const res = await axios.post(backendUrl + 'api/order/verifyStripe', {success, orderId}, {headers: {token}})
+         const res = await axios.post(backendUrl + '/api/order/verifyStripe', {success, orderId}, {headers: {token}})
          console.log(res);
          
          if(res.data.success) {
